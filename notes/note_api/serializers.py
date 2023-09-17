@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import NoteModel
 
@@ -12,3 +13,8 @@ class NoteSerializer(serializers.ModelSerializer):
         """Include default for read_only `user` field"""
         kwargs["user"] = self.fields["user"].get_default()
         return super().save(**kwargs)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ('id','username')
